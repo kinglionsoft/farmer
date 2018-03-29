@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Json Merge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style>
+        .row {
+            width: 100%;
+        }
+
+        .col {
+            width: 30%;
+            display: inline-block;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn {
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="text-align: center">
+        <button id="btn-merge" class="btn">合并</button>
+        <button id="btn-clear" class="btn">清除</button>
+        <p class="info">
+            将自定义内容合并到默认内容中
+        </p>
+    </div>
+    <div class="row">
+        <div class="col">
+            <textarea id="textarea-left" rows="50" placeholder="默认内容"></textarea>
+        </div>
+        <div class="col">
+            <textarea id="textarea-right" rows="50" placeholder="自定义内容"></textarea>
+        </div>
+        <div class="col">
+            <textarea id="textarea-result" rows="50" placeholder="结果"></textarea>
+        </div>
+    </div>
+
+</body>
+<script>
+    var $textareaLeft = document.getElementById('textarea-left');
+    var $textareaRight = document.getElementById('textarea-right');
+    var $textareaResult = document.getElementById('textarea-result');
+
+    window.onload = clear;
+
+    document.getElementById('btn-merge')
+        .addEventListener('click', function () {
+            try {
+                $textareaResult.value = JSON.stringify(mergeJSON(getInputJson($textareaLeft), getInputJson($textareaRight)));
+            } catch (error) {
+                $textareaResult.value = error;
+            }
+        });
+
+    document.getElementById('btn-clear')
+        .addEventListener('click', clear);
+
+    function clear() {
+        $textareaResult.value = '';
+        $textareaLeft.value = '';
+        $textareaRight.value = '';
+    }
+
+    function getInputJson($input) {
+        return JSON.parse($input.value || '{}');
+    }
+
+    /** 将option的属性合并到defaultOption */
+    function mergeJSON(defaultOption, option) {
+        for (var key in defaultOption) {
+            if (option[key] === undefined) {
+                continue;
+            }
+            if (isJSON(defaultOption[key])) {
+                // arguments.callee 递归调用，并且与函数名解耦
+                arguments.callee(defaultOption[key], option[key]);
+            } else {
+                defaultOption[key] = option[key];
+            }
+        }
+        return defaultOption;
+    }
+
+    function isJSON(target) {
+        return typeof target == "object" && target.constructor == Object;
+    }
+</script>
+
+</html>
