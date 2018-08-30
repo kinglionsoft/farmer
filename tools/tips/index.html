@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <title>分享贴士-微信工具-金涞科技</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="图片生成,分享贴士,微信工具,金涞科技" />
+    <meta name="description" content="通过模板生成图片，用于在朋友圈分享" />
+
+    <link type="text/css" rel="stylesheet" href="bower_components/weui/dist/style/weui.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/site.css" />
+    <link type="text/css" rel="stylesheet" href="css/themes/default.css" id="theme-css" />
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="page home js_show" id="container-body">
+            <div class="page__hd">
+                <h1 class="page__title">
+                    微信分享图片合成器
+                </h1>
+                <p class="page__desc">输入文字，生成图片</p>
+            </div>
+            <div class="page__bd page__bd_spacing">
+                <form id="form">
+                    <div class="weui-cells__title">系列</div>
+                    <div class="weui-cells">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" v-model="serial" placeholder="请输入系列">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells__title">标题</div>
+                    <div class="weui-cells">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" v-model="title1" placeholder="请输入标题">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells__title">副标题</div>
+                    <div class="weui-cells">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" v-model="title2" placeholder="请输入标题">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells__title">内容</div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <textarea class="weui-textarea" placeholder="请输入内容" rows="10" v-model="content"></textarea>
+                                <div class="weui-textarea-counter"><span>{{content.length}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="weui-cells__title">预览</div>
+                <div class="tpl" id="tpl-container">
+                    <p class="serial">{{serial}}</p>
+                    <hr>
+                    <br>
+                    <h3 class="title1">{{title1}}</h3>
+                    <h5 class="title2">{{title2}}</h5>
+                    <br>
+                    <p class="text-center"><small class="tip">每天一分钟 法律小贴士</small></p>
+                    <br>
+                    <article class="article">
+                       <p><strong class="beginning">律师解答：</strong></p>
+                       <p>{{content}}</p>
+                    </article>
+                    <br>
+                    <div class="weui-flex">
+                        <div class="weui-flex__item">
+                            <img src="images/qr.jpg" class="qr" />
+                        </div>
+                        <div class="weui-flex__item">
+                            <img src="images/avatar.jpg" class="avatar" />
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="address">四川泰仁律师事务所 <span class="tel">电话：18161230581</span></p>
+                </div>
+
+                <br>
+                <button type="button" class="weui-btn weui-btn_primary" v-on:click="create">生成图片</button>
+                <div class="weui-cells__title" v-show="result">生成结果(长按下图可以分享)</div>
+                <div id="result" v-show="result"></div>
+                <br>
+                <div class="weui-footer">
+                    <p class="weui-footer__text">Copyright © 2018 金涞科技</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="bower_components/dom-to-image/dist/dom-to-image.min.js"></script>
+    <script type="text/javascript">    
+
+        var app = new Vue({
+            el: '#container',
+            data: {
+                serial: '公司股权法系列',
+                title1: '离婚财产分割协议签订时就生效吗？',
+                title2: '副标题',
+                content: '根据《嘻嘻嘻发发啊发啊》dfajfa;fj afja f;aj f;aj fa;jdkfjafa发发发啊啊发就发到放假啊发发生',
+                result: false
+            },
+            methods: {
+                create: function (event) {
+                    app.result = true;
+                    setTimeout(function () {
+                        var result = document.getElementById('result');
+                        result.innerHTML = '';
+                        domtoimage.toSvg(document.getElementById('tpl-container'))
+                            .then(function (dataUrl) {
+                                var img = new Image();
+                                img.src = dataUrl;
+                                result.appendChild(img);
+                                setTimeout(function () {
+                                    var body = document.getElementById('container-body');
+                                    body.scrollTop = body.scrollTop + 300;
+                                }, 100);
+                            })
+                            .catch(function (error) {
+                                app.result = false;
+                                alert('生成失败');
+                            });
+                    });
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

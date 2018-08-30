@@ -1,0 +1,50 @@
+.tpl {
+    padding: 1em 0.5em 2em;
+    background: white;
+}
+
+.tpl .serial {
+    text-align: center;
+}
+
+.tpl .tip {
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.tpl .title1, .tpl .title2 {
+    text-align: center;
+}
+
+.tpl .title2 {
+    font-weight: normal;
+}
+
+.tpl .article {
+    text-indent: 2rem;
+}
+
+.tpl .qr, .tpl .avatar {
+    width: 80%;
+    height: auto;
+}
+
+.tpl .address{
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.tpl .address .tel {
+    float: right;
+}
+
+#result  {
+    -webkit-box-shadow: 0px 0px 5px 4px rgba(133,131,133,0.7);
+    -moz-box-shadow: 0px 0px 5px 4px rgba(133,131,133,0.7);
+    box-shadow: 0px 0px 5px 4px rgba(133,131,133,0.7);
+}
+
+#result img {
+    width: 100%;
+}

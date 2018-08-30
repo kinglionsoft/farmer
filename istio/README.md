@@ -25,14 +25,19 @@ istioctl kube-inject -f greeter.yaml | kubectl apply -f -
 * master 常用指令
 
 ``` bash
-# 查看所有节点\部署\服务\pods
-kubectl get nodes|deployment|services|pods
+# 查看所有节点\部署\服务\pods\hpa(水平伸缩))
+kubectl get nodes|deployment|services|pods|hpa
 
 # 查看节点\部署\服务\pod运行情况
 kubectl describe nodes|deployment|services|pods
 
 # 查看pod日志
 kubectl logs <pod-name>
+kubectl -n ${NAMESPACE} describe pod ${POD_NAME}
+kubectl -n ${NAMESPACE} logs ${POD_NAME} -c ${CONTAINER_NAME}
+
+# 自动扩容
+kubectl autoscale deployment <deployment-name> --cpu-percent=50 --min=1 --max=2
 
 ``` 
 

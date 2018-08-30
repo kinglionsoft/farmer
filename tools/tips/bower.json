@@ -1,0 +1,22 @@
+{
+  "name": "tips",
+  "homepage": "https://github.com/kinglionsoft/farmer",
+  "authors": [
+    "杨超 <yangch_ts@qq.com>"
+  ],
+  "description": "create tip image for wechat sharing",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "dom-to-image": "^2.6.0",
+    "weui": "^1.1.3"
+  }
+}
