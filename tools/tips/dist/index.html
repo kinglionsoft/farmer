@@ -23,66 +23,101 @@
                 <p class="page__desc">输入文字，生成图片</p>
             </div>
             <div class="page__bd page__bd_spacing">
-                <form id="form">
-                    <div class="weui-cells__title">系列</div>
-                    <div class="weui-cells">
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input class="weui-input" type="text" v-model="serial" placeholder="请输入系列">
+                <div class="weui-cells__title">地址
+                    <i v-on:click="address=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" v-model="address" placeholder="请输入地址">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">系列
+                    <i v-on:click="serial=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" v-model="serial" placeholder="请输入系列">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">标题
+                    <i v-on:click="title1=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" v-model="title1" placeholder="请输入标题">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">副标题
+                    <i v-on:click="title2=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" v-model="title2" placeholder="请输入标题">
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">内容
+                    <i v-on:click="content=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" placeholder="请输入内容" rows="10" aria-multiline="true" v-model="content"></textarea>
+                            <div class="weui-textarea-counter">
+                                <span>{{content.length}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="weui-cells__title">标题</div>
-                    <div class="weui-cells">
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input class="weui-input" type="text" v-model="title1" placeholder="请输入标题">
-                            </div>
+                </div>
+                <div class="weui-cells__title">标语
+                    <i v-on:click="slogon=''" class="weui-icon-cancel"></i>
+                </div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" v-model="slogon" placeholder="请输入标语">
                         </div>
                     </div>
-                    <div class="weui-cells__title">副标题</div>
-                    <div class="weui-cells">
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <input class="weui-input" type="text" v-model="title2" placeholder="请输入标题">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-cells__title">内容</div>
-                    <div class="weui-cells weui-cells_form">
-                        <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <textarea class="weui-textarea" placeholder="请输入内容" rows="10" v-model="content"></textarea>
-                                <div class="weui-textarea-counter"><span>{{content.length}}</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
                 <div class="weui-cells__title">预览</div>
                 <div class="tpl" id="tpl-container">
+                    <div class="text-center">
+                        <fieldset class="tip">
+                            <legend>每天一分钟</legend>
+                            读懂法律小知识
+                        </fieldset>
+                    </div>
                     <p class="serial">{{serial}}</p>
-                    <hr>
                     <br>
-                    <h3 class="title1">{{title1}}</h3>
+                    <div class="text-center">
+                        <h3 class="title1">{{title1}}</h3>
+                    </div>
                     <h5 class="title2">{{title2}}</h5>
                     <br>
-                    <p class="text-center"><small class="tip">每天一分钟 法律小贴士</small></p>
-                    <br>
+
                     <article class="article">
-                       <p><strong class="beginning">律师解答：</strong></p>
-                       <p>{{content}}</p>
+                        <p>
+                            <strong class="beginning">律师解答：</strong>
+                        </p>
+                        <p class="content">{{content}}</p>
                     </article>
                     <br>
-                    <div class="weui-flex">
-                        <div class="weui-flex__item">
-                            <img src="images/qr.jpg" class="qr" />
-                        </div>
-                        <div class="weui-flex__item">
-                            <img src="images/avatar.jpg" class="avatar" />
-                        </div>
+                    <div class="text-center">
+                        <img src="images/qr.jpg" class="qr" />
                     </div>
+                    <p class="slogon">{{slogon}}</p>
                     <hr>
-                    <p class="address">四川泰仁律师事务所 <span class="tel">电话：18161230581</span></p>
+                    <p class="address">{{address}}
+                        <span class="tel">电话：{{tel}}</span>
+                    </p>
+                    <hr>
                 </div>
 
                 <br>
@@ -106,8 +141,11 @@
             data: {
                 serial: '公司股权法系列',
                 title1: '离婚财产分割协议签订时就生效吗？',
-                title2: '副标题',
-                content: '根据《嘻嘻嘻发发啊发啊》dfajfa;fj afja f;aj f;aj fa;jdkfjafa发发发啊啊发就发到放假啊发发生',
+                title2: '',
+                content: '法律解释，是指对法律和法规条文的含义所作的说明。依据解释是否具有法律效力分为正式解释和非正式解释；依据解释所具有的法律效力范围分为规范性解释和个别性解释；依据解释的方法分为文法解释、逻辑解释、系统解释、历史解释；依据解释的尺度分为字面解释、限制解释、扩充解释。法律解释对于实现法律对社会关系的调整起着极重要的作用，尤其在法律适用过程中，是一个必不可少的环节。',
+                address: '',
+                tel: '18161230581',
+                slogon: '启法明善 诚信为盟',
                 result: false
             },
             methods: {
