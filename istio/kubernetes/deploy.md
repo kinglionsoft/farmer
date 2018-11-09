@@ -6,9 +6,9 @@
 ## 安装 kubernetes
 
 * 参考 [https://www.kubernetes.org.cn/4387.html](https://www.kubernetes.org.cn/4387.html)
-* Master: 192.168.0.240
-* Node1: 192.168.0.241
-* Node2: 192.168.0.242
+* Master: 192.168.237
+* Node1: 192.168.0.238
+* Node2: 192.168.0.239
 * Win Node1: 192.168.0.243
 
 ### 补充

@@ -4,7 +4,7 @@
 
 * [https://kubernetes.io/docs/getting-started-guides/windows/](https://kubernetes.io/docs/getting-started-guides/windows/)
 * [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/)
-
+https://anthonychu.ca/post/hybrid-kubernetes-linux-windows-cluster-easy-steps/
 ## 安装
 * Windows Server 2016 Version 要在1709 以上
 
