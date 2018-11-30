@@ -77,7 +77,7 @@ rm -rf /data/database /data/registry
 
 ## 将registry.yx.com的自签名证书加入受信列表
 
-* Linux
+* Linux： https://docs.docker.com/registry/insecure/#use-self-signed-certificates
 
 ``` bash
 curl -s -L http://share.yx.com/import-registry.yx.com-ca-root.sh | bash

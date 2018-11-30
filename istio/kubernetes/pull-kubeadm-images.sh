@@ -9,3 +9,5 @@ do
     docker tag $registry$img $img
 	docker rmi $registry$img
 done 
+
+# for img in ${images[@]}; do docker rmi $registry$img; done

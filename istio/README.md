@@ -4,6 +4,7 @@
 * User: yang
 
 ## 部署
+https://istio.io/zh/docs/setup/kubernetes/download-release/
 
 ``` bash
 mkdir /opt/istio

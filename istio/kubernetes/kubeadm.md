@@ -11,8 +11,7 @@ export https_proxy="http://127.0.0.1:8123/"
 * disable Swap 
 
 ``` bash
-swapoff -a
-sed -i '/ swap / s/^/#/' /etc/fstab
+sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
 ```
 
 * install kubeadm: https://kubernetes.io/docs/setup/independent/install-kubeadm/
@@ -20,6 +19,7 @@ sed -i '/ swap / s/^/#/' /etc/fstab
 * docker http proxy: https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
 
 ```
+# /etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTPS_PROXY=http://127.0.0.1:8123" "NO_PROXY=*.docker-cn.com,*.docker.com,*.yx.com"
 ```
@@ -51,19 +51,23 @@ EOF
 kubeadm init --config ~/kubeadm-master.yml
 
 # join node to cluster
-kubeadm join 192.168.0.237:6443 --token 0zdquu.b37how3ijvvp5ba1 --discovery-token-ca-cert-hash sha256:20ee3b9557a1c36a2b857091d368d909467965ff100a06fb5cf7d99733dc5c32
+sudo kubeadm join 192.168.0.237:6443 --token tzcgai.rryily12sont1u1q --discovery-token-ca-cert-hash sha256:14296d0a1029dedb186031ea71f67f138f34bdd5846fad90de0d634e013879d4
 
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+mkdir -p $HOME/.kube; \
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; \
+sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 # install pod network - Calico 
-see: https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
+# see: https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
+
+# install pod network - Fannel - for working with Windows
+
 
 # on master
 watch kubectl get nodes
 
 # node2 NotReady - docker pull failed
+kubectl describe nodes
 journalctl -f -u kubelet
 
 ```
@@ -71,9 +75,20 @@ journalctl -f -u kubelet
 * Tear down 
 
 ```bash
-kubectl drain kube-node2 --delete-local-data --force --ignore-daemonsets
-kubectl delete node kube-node2
+kubectl drain kube-node1 --delete-local-data --force --ignore-daemonsets
+kubectl delete node kube-node1
 kubeadm reset
 ```
 
-## Windows
+## Dashboard
+* https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#accessing-the-dashboard-ui
+
+## Errors
+
+#### ImagePullBackOff
+
+``` bash
+kubectl describe pod kubernetes-dashboard-77fd78f978-xbnfb -n=kube-system # 查看日志 
+# Failed to pull image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0" : 科学上网
+```
+
