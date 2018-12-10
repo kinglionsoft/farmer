@@ -18,11 +18,6 @@ sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
 * docker http proxy: https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
 
-```
-# /etc/systemd/system/docker.service.d/http-proxy.conf
-[Service]
-Environment="HTTPS_PROXY=http://127.0.0.1:8123" "NO_PROXY=*.docker-cn.com,*.docker.com,*.yx.com"
-```
 * config master
 
 ``` bash

@@ -4,15 +4,11 @@
 * User: yang
 
 ## 部署
-https://istio.io/zh/docs/setup/kubernetes/download-release/
-
+* see: https://istio.io/zh/docs/setup/kubernetes/download-release/
+* 修改 istio-demo.yaml，这是nodeSelector为linux。修改后文件为：istio-demo-win.yaml
 ``` bash
-mkdir /opt/istio
-cd /opt/istio
-wget https://github.com/istio/istio/releases/download/1.0.0/istio-1.0.0-linux.tar.gz
-tar -zxf istio-1.0.0-linux.tar.gz
-echo "export PATH=/opt/istio/istio-1.0.0/bin:$PATH" > /etc/profile.d/istio.sh
-source /etc/profile
+cd /opt
+
 ```
 
 ## 配置
@@ -53,6 +49,7 @@ kubectl autoscale deployment <deployment-name> --cpu-percent=50 --min=1 --max=2
 /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://78i6a9m9.mirror.aliyuncs.com"],
+  
   "insecure-registries": ["192.168.0.240:5000"]
 }
 
