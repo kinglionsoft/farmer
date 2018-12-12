@@ -85,7 +85,7 @@ curl -s -L http://share.yx.com/import-registry.yx.com-ca-root.sh | bash
 
 > 若无效，参考手动添加：https://askubuntu.com/questions/440580/how-does-one-remove-a-certificate-authoritys-certificate-from-a-system
 
-* Windows: 下载 http://share.yx.com/registry.yx.com_ca_root.crt.crt，安装到 【本地计算机】 -> 【受信任的根证书颁发机构】
+* Windows: 下载 http://share.yx.com/registry.yx.com_ca_root.crt，安装到 【本地计算机】 -> 【受信任的根证书颁发机构】
 
 
 ## Errors
