@@ -50,7 +50,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # join node to cluster
-sudo kubeadm join 192.168.0.237:6443 --token pq3asj.6apo1p3kac44px6x --discovery-token-ca-cert-hash sha256:7a483421420d26d60572939ee1f35b2ff2c5a8c2f1e87d35c3c5075150ad12eb
+sudo kubeadm join 192.168.0.237:6443 --token gtx10w.egiadfmkraoad2dt --discovery-token-ca-cert-hash sha256:7a483421420d26d60572939ee1f35b2ff2c5a8c2f1e87d35c3c5075150ad12eb
 
 mkdir -p $HOME/.kube; \
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; \
@@ -94,3 +94,13 @@ kubectl describe pod kubernetes-dashboard-77fd78f978-xbnfb -n=kube-system # 查�
 # Failed to pull image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0" : 科学上网
 ```
 
+### 双网卡节点
+
+* 修改 /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+```
+[Service]
+Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --node-ip=192.168.0.245"
+
+```
+
+## Upgrade
