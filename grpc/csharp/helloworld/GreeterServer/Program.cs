@@ -30,18 +30,17 @@ namespace GreeterServer
 
     class Program
     {
-        const int Port = 50051;
-
         public static void Main(string[] args)
         {
+            var port = args.Length ==1 ? int.Parse(args[0]): 9001;
             Server server = new Server
             {
                 Services = { Greeter.BindService(new GreeterImpl()) },
-                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
             };
             server.Start();
 
-            Console.WriteLine("Greeter server listening on port " + Port);
+            Console.WriteLine("Greeter server listening on port " + port);
             Console.WriteLine("Press any key to stop the server...");
             Console.ReadKey();
 

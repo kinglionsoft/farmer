@@ -2,13 +2,13 @@
 
 ``` bash
 # set ssr: 直连模式
-export http_proxy=http://192.168.0.123:1080
-export https_proxy=http://192.168.0.123:1080
+export http_proxy=http://192.168.1.123:1080
+export https_proxy=http://192.168.1.123:1080
 
 # set proxy for apt
 tee apt-proxy.conf <<EOF
-Acquire::http::proxy "http://192.168.0.123:1080/";
-Acquire::https::proxy "http://192.168.0.123:1080/";
+Acquire::http::proxy "http://192.168.1.123:1080/";
+Acquire::https::proxy "http://192.168.1.123:1080/";
 EOF
 
 # upgrade kubeadm
