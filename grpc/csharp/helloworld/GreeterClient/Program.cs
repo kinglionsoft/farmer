@@ -22,7 +22,11 @@ namespace GreeterClient
     {
         public static void Main(string[] args)
         {
-            var t = args.Length == 1 ? args[0] : "localhost:9001";
+            //Environment.SetEnvironmentVariable("GRPC_TRACE", "api");
+            //Environment.SetEnvironmentVariable("GRPC_VERBOSITY", "debug");
+            //Grpc.Core.GrpcEnvironment.SetLogger(new Grpc.Core.Logging.ConsoleLogger());
+
+            var t = args.Length == 1 ? args[0] : "192.168.0.12:19081/GuestExeSample/GrpcHello";
             Channel channel = new Channel(t, ChannelCredentials.Insecure);
 
             var client = new Greeter.GreeterClient(channel);

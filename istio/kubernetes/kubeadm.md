@@ -66,7 +66,7 @@ kubeadm config images pull
 [config/images] Pulled k8s.gcr.io/coredns:1.2.2
 
 # 添加kubeadm配置
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --apiserver-advertise-address=172.16.0.21
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --apiserver-advertise-address=172.16.0.21 --apiserver-cert-extra-sans=192.168.0.245
 
 rm -rf $HOME/.kube; \
 mkdir -p $HOME/.kube; \
@@ -89,7 +89,7 @@ kubectl apply -f kube-flannel.yml
 
 
 # join node to cluster
-sudo kubeadm join 172.16.0.21:6443 --token qbi884.7itgg3692l75byda --discovery-token-ca-cert-hash sha256:e4c01734eb4a989446437c8559897d00926a8a4258bf951d24ad3507096f1efa
+sudo kubeadm join 172.16.0.21:6443 --token 2tw8sk.b5cjhdmiasqwhqw4 --discovery-token-ca-cert-hash sha256:f4a195b6051513e5608682f75f1f165ca268693391ced9e81d5f123dfa08958e
 
 # get token and discovery-token
 kubeadm token list

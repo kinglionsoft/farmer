@@ -1,0 +1,19 @@
+<Configuration ID="496042ba-4b12-4064-848a-c222fe85a16b">
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2019" ForceUpgrade="TRUE">
+    <Product ID="Standard2019Volume">
+      <Language ID="zh-cn" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="OneNote" />
+      <ExcludeApp ID="Outlook" />
+      <ExcludeApp ID="Publisher" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="PinIconsToTaskbar" Value="FALSE" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Updates Enabled="FALSE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="FALSE" />
+  <Logging Level="Off" />
+</Configuration>
