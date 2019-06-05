@@ -24,7 +24,7 @@ EOF
 sudo mkdir -p /etc/systemd/system/docker.service.d
 sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf << EOF
 [Service]
-Environment="HTTPS_PROXY=http://192.168.0.123:1080" "NO_PROXY=localhost,127.0.0.1,.docker-cn.com,.docker.com,.yx.com,.docker.io,.aliyuncs.com"
+Environment="HTTPS_PROXY=http://192.168.1.123:11080" "NO_PROXY=localhost,127.0.0.1,.docker-cn.com,.docker.com,.yx.com,.docker.io,.aliyuncs.com"
 EOF
 
 sudo systemctl daemon-reload && sudo systemctl restart docker

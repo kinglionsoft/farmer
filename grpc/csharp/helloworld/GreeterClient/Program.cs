@@ -24,16 +24,22 @@ namespace GreeterClient
         {
             //Environment.SetEnvironmentVariable("GRPC_TRACE", "api");
             //Environment.SetEnvironmentVariable("GRPC_VERBOSITY", "debug");
-            //Grpc.Core.GrpcEnvironment.SetLogger(new Grpc.Core.Logging.ConsoleLogger());
+            Grpc.Core.GrpcEnvironment.SetLogger(new Grpc.Core.Logging.ConsoleLogger());
 
-            var t = args.Length == 1 ? args[0] : "192.168.0.12:19081/GuestExeSample/GrpcHello";
+            //var t = args[0];
+            //var count = int.Parse(args[1]);
+            var t = "localhost:9006";
+            var count = 2;
             Channel channel = new Channel(t, ChannelCredentials.Insecure);
 
             var client = new Greeter.GreeterClient(channel);
             String user = "you";
 
-            var reply = client.SayHello(new HelloRequest { Name = user });
-            Console.WriteLine("Greeting: " + reply.Message);
+            for (var i = 0; i < count; i++)
+            {
+                var reply = client.SayHello(new HelloRequest { Name = user });
+                Console.WriteLine("Greeting: " + reply.Message);
+            }
 
             channel.ShutdownAsync().Wait();
             Console.WriteLine("Press any key to exit...");
