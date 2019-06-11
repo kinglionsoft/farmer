@@ -4,7 +4,7 @@
 * User: yang
 
 ## 部署
-* see: https://istio.io/zh/docs/setup/kubernetes/download-release/
+* see: https://istio.io/docs/setup/kubernetes/
 * 修改 istio-demo.yaml，这是nodeSelector为linux。修改后文件为：istio-demo-win.yaml
 ``` bash
 cd /opt

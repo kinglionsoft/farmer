@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: grpc-server-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 9005
+      name: grpc
+      protocol: GRPC #or GRPC, which gives the same result
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grpc-server
+spec:
+  hosts:
+  - grpc-server
+  gateways:
+  - grpc-server-gateway
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9005
+        host: grpc-server
+---        
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: grpc-server
+spec:
+  host: grpc-server
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
