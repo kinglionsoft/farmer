@@ -63,3 +63,5 @@ kubectl create -f data-consul-0-pv.yaml
 kubectl port-forward consul-0 --address=0.0.0.0 8500:8500
 ```
 
+### Expose
+

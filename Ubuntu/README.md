@@ -22,4 +22,19 @@ echo  "10000    65500" >  /proc/sys/net/ipv4/ip_local_port_range
 # /usr/lib/tmpfiles.d/tmp.conf
 D /tmp 1777 root root 5d
 # Windows => Start > Settings > System > Storage > Toggle on Storage sense 
+
+# 硬盘扩容
+fdisk -l
+
+parted
+
+p
+
+resizepart 2
+
+100%
+
+q
+
+resize2fs /dev/sda2
 ```
