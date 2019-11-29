@@ -53,6 +53,26 @@ kubectl autoscale deployment <deployment-name> --cpu-percent=50 --min=1 --max=2
   "insecure-registries": ["192.168.0.240:5000"]
 }
 
+* 3. External IP
+本地集群没有LB，通过nginx代理实现
+
+``` bash
+# 获取istio-ingressgateway的nodePort
+kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}'
+
+# nginx
+
+server {
+  listen       80;
+
+  location / {
+    proxy_pass http://127.0.0.1:31380/;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $http_host;
+    }
+}
+```
 
 ## Greeter Sample
 
