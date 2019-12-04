@@ -1,20 +1,18 @@
 # 部署 k8s Dashboard
 
-* https://k8smeetup.github.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+* https://github.com/kubernetes/dashboard
 
 ### 配置用户名密码
 
 ``` bash
-cat << EOF > dashboard-user.yaml
-# dashboard-user
+kubectl create -f - <<EOF
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: admin-user
   namespace: kube-system
 ---
-# admin-user-binding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: admin-user
@@ -26,30 +24,30 @@ subjects:
 - kind: ServiceAccount
   name: admin-user
   namespace: kube-system
----
-# kubernetes-dashboard remote access
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: kubernetes-dashboard
-  labels:
-    k8s-app: kubernetes-dashboard
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: kubernetes-dashboard
-  namespace: kube-system
-
 EOF
-kubectl create -f dashboard-user.yaml
-
-# 查看token
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
-
-# 启动代理 k8s.yx.com -> 192.168.0.237
-kubectl proxy --address=192.168.0.237 --accept-hosts=^k8s\.yx\.com
 ```
-* 浏览器访问：http://k8s.yx.com:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
+
+### 访问
+
+使用K8s API Server的方式访问， 参考： https://www.cnblogs.com/RainingNight/p/deploying-k8s-dashboard-ui.html
+
+#### 生成证书
+``` bash
+# 生成client-certificate-data
+grep 'client-certificate-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.crt
+# 生成client-key-data
+grep 'client-key-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.key
+# 生成p12
+openssl pkcs12 -export -clcerts -inkey kubecfg.key -in kubecfg.crt -out kubecfg.p12 -name "kubernetes-client"
+
+# 下载证书并安装 kubecfg.p12 密码123456
+```
+
+#### 登录
+
+https://172.16.0.21:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+``` bash
+# token
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
