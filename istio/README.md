@@ -62,15 +62,11 @@ kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.por
 
 # nginx
 
-server {
-  listen       80;
-
-  location / {
-    proxy_pass http://127.0.0.1:31380/;
-    proxy_http_version 1.1;
-    proxy_set_header Connection "";
-    proxy_set_header Host $http_host;
-    }
+stream {
+  server {
+      listen 443;
+      proxy_pass 127.0.0.1:443;
+  }
 }
 ```
 
