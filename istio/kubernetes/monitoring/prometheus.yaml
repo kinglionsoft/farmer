@@ -307,7 +307,7 @@ data:
             regex: __meta_kubernetes_ingress_label_(.+)
           - source_labels: [__meta_kubernetes_namespace]
             target_label: kubernetes_namespace
-          - source_labels: [__meta_kubernetes_ingress_name]
+          - source_labels: [__meta_kubernetes_ingress_name]list
             target_label: kubernetes_name
 
       # Example scrape config for pods
@@ -366,38 +366,6 @@ data:
             annotations:
               summary: "{{$labels.instance}}: High CPU usage detected"
               description: "{{$labels.instance}}: CPU usage is above 75% (current value is: {{ $value }})"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: "prometheus-data-pv"
-  namespace: ns-monitor
-  labels:
-    name: prometheus-data-pv
-    release: stable
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 5Gi
-  csi:
-    driver: efs.csi.aws.com
-    volumeHandle: fs-c5174da4
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: efs-sc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: prometheus-data-pvc
-  namespace: ns-monitor
-spec:
-  storageClassName: efs-sc
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
 ---
 kind: Deployment
 apiVersion: apps/v1beta2
