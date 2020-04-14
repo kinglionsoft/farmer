@@ -1,0 +1,69 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-datacenter
+spec:
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 0
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: mysql-datacenter
+subsets:
+  - addresses:
+      - ip: "172.31.21.242"
+    ports:
+      - port: 3306
+        name: mysql
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mssqlserver-core
+spec:
+  ports:
+    - name: mssqlserver
+      protocol: TCP
+      port: 1433
+      targetPort: 1433
+      nodePort: 0
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: mssqlserver-core
+subsets:
+  - addresses:
+      - ip: "172.31.27.41"
+    ports:
+      - port: 1433
+        name: mssqlserver
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fileutils
+spec:
+  ports:
+    - name: fileutils
+      protocol: TCP
+      port: 5511
+      targetPort: 5511
+      nodePort: 0
+---  
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: fileutils
+subsets:
+  - addresses:
+      - ip: "172.31.21.242"
+      - ip: "172.31.27.41"
+    ports:
+      - port: 5511
+        name: fileutils

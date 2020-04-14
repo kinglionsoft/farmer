@@ -31,7 +31,7 @@ network:
                 addresses:
                 - 192.168.0.201
                 search:
-                - yx.com
+                - local.com
             set-name: k8s
     version: 2
 

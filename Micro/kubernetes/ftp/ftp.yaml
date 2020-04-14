@@ -1,0 +1,567 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftp
+  labels:
+    app: ftp
+spec:
+  ports:
+  - port: 21
+    targetPort: 21
+    name: tcp-21
+  - port: 20
+    targetPort: 20
+    name: tcp-20
+  - port: 9000
+    targetPort: 9000
+    name: tcp-9000
+  - port: 9001
+    targetPort: 9001
+    name: tcp-9001
+  - port: 9002
+    targetPort: 9002
+    name: tcp-9002
+  - port: 9003
+    targetPort: 9003
+    name: tcp-9003
+  - port: 9004
+    targetPort: 9004
+    name: tcp-9004
+  - port: 9005
+    targetPort: 9005
+    name: tcp-9005
+  - port: 9006
+    targetPort: 9006
+    name: tcp-9006
+  - port: 9007
+    targetPort: 9007
+    name: tcp-9007
+  - port: 9008
+    targetPort: 9008
+    name: tcp-9008
+  - port: 9009
+    targetPort: 9009
+    name: tcp-9009
+  - port: 9010
+    targetPort: 9010
+    name: tcp-9010
+  - port: 9011
+    targetPort: 9011
+    name: tcp-9011
+  - port: 9012
+    targetPort: 9012
+    name: tcp-9012
+  - port: 9013
+    targetPort: 9013
+    name: tcp-9013
+  - port: 9014
+    targetPort: 9014
+    name: tcp-9014
+  - port: 9015
+    targetPort: 9015
+    name: tcp-9015
+  - port: 9016
+    targetPort: 9016
+    name: tcp-9016
+  - port: 9017
+    targetPort: 9017
+    name: tcp-9017
+  - port: 9018
+    targetPort: 9018
+    name: tcp-9018
+  - port: 9019
+    targetPort: 9019
+    name: tcp-9019
+  - port: 9020
+    targetPort: 9020
+    name: tcp-9020
+  - port: 9021
+    targetPort: 9021
+    name: tcp-9021
+  - port: 9022
+    targetPort: 9022
+    name: tcp-9022
+  - port: 9023
+    targetPort: 9023
+    name: tcp-9023
+  - port: 9024
+    targetPort: 9024
+    name: tcp-9024
+  - port: 9025
+    targetPort: 9025
+    name: tcp-9025
+  - port: 9026
+    targetPort: 9026
+    name: tcp-9026
+  - port: 9027
+    targetPort: 9027
+    name: tcp-9027
+  - port: 9028
+    targetPort: 9028
+    name: tcp-9028
+  - port: 9029
+    targetPort: 9029
+    name: tcp-9029
+  - port: 9030
+    targetPort: 9030
+    name: tcp-9030
+  - port: 9031
+    targetPort: 9031
+    name: tcp-9031
+  - port: 9032
+    targetPort: 9032
+    name: tcp-9032
+  - port: 9033
+    targetPort: 9033
+    name: tcp-9033
+  - port: 9034
+    targetPort: 9034
+    name: tcp-9034
+  - port: 9035
+    targetPort: 9035
+    name: tcp-9035
+  - port: 9036
+    targetPort: 9036
+    name: tcp-9036
+  - port: 9037
+    targetPort: 9037
+    name: tcp-9037
+  - port: 9038
+    targetPort: 9038
+    name: tcp-9038
+  - port: 9039
+    targetPort: 9039
+    name: tcp-9039
+  - port: 9040
+    targetPort: 9040
+    name: tcp-9040
+  - port: 9041
+    targetPort: 9041
+    name: tcp-9041
+  - port: 9042
+    targetPort: 9042
+    name: tcp-9042
+  - port: 9043
+    targetPort: 9043
+    name: tcp-9043
+  - port: 9044
+    targetPort: 9044
+    name: tcp-9044
+  - port: 9045
+    targetPort: 9045
+    name: tcp-9045
+  - port: 9046
+    targetPort: 9046
+    name: tcp-9046
+  - port: 9047
+    targetPort: 9047
+    name: tcp-9047
+  - port: 9048
+    targetPort: 9048
+    name: tcp-9048
+  - port: 9049
+    targetPort: 9049
+    name: tcp-9049
+  - port: 9050
+    targetPort: 9050
+    name: tcp-9050
+  - port: 9051
+    targetPort: 9051
+    name: tcp-9051
+  - port: 9052
+    targetPort: 9052
+    name: tcp-9052
+  - port: 9053
+    targetPort: 9053
+    name: tcp-9053
+  - port: 9054
+    targetPort: 9054
+    name: tcp-9054
+  - port: 9055
+    targetPort: 9055
+    name: tcp-9055
+  - port: 9056
+    targetPort: 9056
+    name: tcp-9056
+  - port: 9057
+    targetPort: 9057
+    name: tcp-9057
+  - port: 9058
+    targetPort: 9058
+    name: tcp-9058
+  - port: 9059
+    targetPort: 9059
+    name: tcp-9059
+  - port: 9060
+    targetPort: 9060
+    name: tcp-9060
+  - port: 9061
+    targetPort: 9061
+    name: tcp-9061
+  - port: 9062
+    targetPort: 9062
+    name: tcp-9062
+  - port: 9063
+    targetPort: 9063
+    name: tcp-9063
+  - port: 9064
+    targetPort: 9064
+    name: tcp-9064
+  - port: 9065
+    targetPort: 9065
+    name: tcp-9065
+  - port: 9066
+    targetPort: 9066
+    name: tcp-9066
+  - port: 9067
+    targetPort: 9067
+    name: tcp-9067
+  - port: 9068
+    targetPort: 9068
+    name: tcp-9068
+  - port: 9069
+    targetPort: 9069
+    name: tcp-9069
+  - port: 9070
+    targetPort: 9070
+    name: tcp-9070
+  - port: 9071
+    targetPort: 9071
+    name: tcp-9071
+  - port: 9072
+    targetPort: 9072
+    name: tcp-9072
+  - port: 9073
+    targetPort: 9073
+    name: tcp-9073
+  - port: 9074
+    targetPort: 9074
+    name: tcp-9074
+  - port: 9075
+    targetPort: 9075
+    name: tcp-9075
+  - port: 9076
+    targetPort: 9076
+    name: tcp-9076
+  - port: 9077
+    targetPort: 9077
+    name: tcp-9077
+  - port: 9078
+    targetPort: 9078
+    name: tcp-9078
+  - port: 9079
+    targetPort: 9079
+    name: tcp-9079
+  - port: 9080
+    targetPort: 9080
+    name: tcp-9080
+  - port: 9081
+    targetPort: 9081
+    name: tcp-9081
+  - port: 9082
+    targetPort: 9082
+    name: tcp-9082
+  - port: 9083
+    targetPort: 9083
+    name: tcp-9083
+  - port: 9084
+    targetPort: 9084
+    name: tcp-9084
+  - port: 9085
+    targetPort: 9085
+    name: tcp-9085
+  - port: 9086
+    targetPort: 9086
+    name: tcp-9086
+  - port: 9087
+    targetPort: 9087
+    name: tcp-9087
+  - port: 9088
+    targetPort: 9088
+    name: tcp-9088
+  - port: 9089
+    targetPort: 9089
+    name: tcp-9089
+  - port: 9090
+    targetPort: 9090
+    name: tcp-9090
+  - port: 9091
+    targetPort: 9091
+    name: tcp-9091
+  - port: 9092
+    targetPort: 9092
+    name: tcp-9092
+  - port: 9093
+    targetPort: 9093
+    name: tcp-9093
+  - port: 9094
+    targetPort: 9094
+    name: tcp-9094
+  - port: 9095
+    targetPort: 9095
+    name: tcp-9095
+  - port: 9096
+    targetPort: 9096
+    name: tcp-9096
+  - port: 9097
+    targetPort: 9097
+    name: tcp-9097
+  - port: 9098
+    targetPort: 9098
+    name: tcp-9098
+  - port: 9099
+    targetPort: 9099
+    name: tcp-9099
+  - port: 9100
+    targetPort: 9100
+    name: tcp-9100
+  selector:
+    app: ftp
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ftp
+  name: ftp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ftp
+      name: ftp
+    spec:
+      containers:
+      - name: ftp
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/ftp
+        ports:
+          - containerPort: 21
+            name: tcp-21
+          - containerPort: 20
+            name: tcp-20
+          - containerPort: 9000
+            name: tcp-9000
+          - containerPort: 9001
+            name: tcp-9001
+          - containerPort: 9002
+            name: tcp-9002
+          - containerPort: 9003
+            name: tcp-9003
+          - containerPort: 9004
+            name: tcp-9004
+          - containerPort: 9005
+            name: tcp-9005
+          - containerPort: 9006
+            name: tcp-9006
+          - containerPort: 9007
+            name: tcp-9007
+          - containerPort: 9008
+            name: tcp-9008
+          - containerPort: 9009
+            name: tcp-9009
+          - containerPort: 9010
+            name: tcp-9010
+          - containerPort: 9011
+            name: tcp-9011
+          - containerPort: 9012
+            name: tcp-9012
+          - containerPort: 9013
+            name: tcp-9013
+          - containerPort: 9014
+            name: tcp-9014
+          - containerPort: 9015
+            name: tcp-9015
+          - containerPort: 9016
+            name: tcp-9016
+          - containerPort: 9017
+            name: tcp-9017
+          - containerPort: 9018
+            name: tcp-9018
+          - containerPort: 9019
+            name: tcp-9019
+          - containerPort: 9020
+            name: tcp-9020
+          - containerPort: 9021
+            name: tcp-9021
+          - containerPort: 9022
+            name: tcp-9022
+          - containerPort: 9023
+            name: tcp-9023
+          - containerPort: 9024
+            name: tcp-9024
+          - containerPort: 9025
+            name: tcp-9025
+          - containerPort: 9026
+            name: tcp-9026
+          - containerPort: 9027
+            name: tcp-9027
+          - containerPort: 9028
+            name: tcp-9028
+          - containerPort: 9029
+            name: tcp-9029
+          - containerPort: 9030
+            name: tcp-9030
+          - containerPort: 9031
+            name: tcp-9031
+          - containerPort: 9032
+            name: tcp-9032
+          - containerPort: 9033
+            name: tcp-9033
+          - containerPort: 9034
+            name: tcp-9034
+          - containerPort: 9035
+            name: tcp-9035
+          - containerPort: 9036
+            name: tcp-9036
+          - containerPort: 9037
+            name: tcp-9037
+          - containerPort: 9038
+            name: tcp-9038
+          - containerPort: 9039
+            name: tcp-9039
+          - containerPort: 9040
+            name: tcp-9040
+          - containerPort: 9041
+            name: tcp-9041
+          - containerPort: 9042
+            name: tcp-9042
+          - containerPort: 9043
+            name: tcp-9043
+          - containerPort: 9044
+            name: tcp-9044
+          - containerPort: 9045
+            name: tcp-9045
+          - containerPort: 9046
+            name: tcp-9046
+          - containerPort: 9047
+            name: tcp-9047
+          - containerPort: 9048
+            name: tcp-9048
+          - containerPort: 9049
+            name: tcp-9049
+          - containerPort: 9050
+            name: tcp-9050
+          - containerPort: 9051
+            name: tcp-9051
+          - containerPort: 9052
+            name: tcp-9052
+          - containerPort: 9053
+            name: tcp-9053
+          - containerPort: 9054
+            name: tcp-9054
+          - containerPort: 9055
+            name: tcp-9055
+          - containerPort: 9056
+            name: tcp-9056
+          - containerPort: 9057
+            name: tcp-9057
+          - containerPort: 9058
+            name: tcp-9058
+          - containerPort: 9059
+            name: tcp-9059
+          - containerPort: 9060
+            name: tcp-9060
+          - containerPort: 9061
+            name: tcp-9061
+          - containerPort: 9062
+            name: tcp-9062
+          - containerPort: 9063
+            name: tcp-9063
+          - containerPort: 9064
+            name: tcp-9064
+          - containerPort: 9065
+            name: tcp-9065
+          - containerPort: 9066
+            name: tcp-9066
+          - containerPort: 9067
+            name: tcp-9067
+          - containerPort: 9068
+            name: tcp-9068
+          - containerPort: 9069
+            name: tcp-9069
+          - containerPort: 9070
+            name: tcp-9070
+          - containerPort: 9071
+            name: tcp-9071
+          - containerPort: 9072
+            name: tcp-9072
+          - containerPort: 9073
+            name: tcp-9073
+          - containerPort: 9074
+            name: tcp-9074
+          - containerPort: 9075
+            name: tcp-9075
+          - containerPort: 9076
+            name: tcp-9076
+          - containerPort: 9077
+            name: tcp-9077
+          - containerPort: 9078
+            name: tcp-9078
+          - containerPort: 9079
+            name: tcp-9079
+          - containerPort: 9080
+            name: tcp-9080
+          - containerPort: 9081
+            name: tcp-9081
+          - containerPort: 9082
+            name: tcp-9082
+          - containerPort: 9083
+            name: tcp-9083
+          - containerPort: 9084
+            name: tcp-9084
+          - containerPort: 9085
+            name: tcp-9085
+          - containerPort: 9086
+            name: tcp-9086
+          - containerPort: 9087
+            name: tcp-9087
+          - containerPort: 9088
+            name: tcp-9088
+          - containerPort: 9089
+            name: tcp-9089
+          - containerPort: 9090
+            name: tcp-9090
+          - containerPort: 9091
+            name: tcp-9091
+          - containerPort: 9092
+            name: tcp-9092
+          - containerPort: 9093
+            name: tcp-9093
+          - containerPort: 9094
+            name: tcp-9094
+          - containerPort: 9095
+            name: tcp-9095
+          - containerPort: 9096
+            name: tcp-9096
+          - containerPort: 9097
+            name: tcp-9097
+          - containerPort: 9098
+            name: tcp-9098
+          - containerPort: 9099
+            name: tcp-9099
+          - containerPort: 9100
+            name: tcp-9100
+        env:
+          - name: FTP_USER
+            value: ctc
+          - name: FTP_PASS
+            value: "Yxkj11!!$$"
+          - name: PASV_MIN_PORT
+            value: "9000"
+          - name: PASV_MAX_PORT
+            value: "9100"
+          - name: PASV_ADDRESS
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+        volumeMounts:
+        - mountPath: /home/vsftpd
+          name: data
+      volumes:
+        - name: data
+          hostPath:
+            path: /data/ftp     
+      nodeSelector:
+        kubernetes.io/hostname: eson-entry    

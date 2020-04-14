@@ -1,0 +1,118 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth
+      name: auth
+    spec:
+      containers:
+      - name: idsvr4
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/idsvr4:2.2 
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      - name: client
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/idsvr4-client:2.2 
+        ports:
+        - containerPort: 81
+          name: http-grpc
+        env:
+        - name: ASPNETCORE_URLS
+          value: "81"
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      - name: grant
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/idsvr4-grant:2.2 
+        ports:
+        - containerPort: 83
+          name: http-grpc
+        env:
+        - name: ASPNETCORE_URLS
+          value: "83"
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      - name: resource
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/idsvr4-resource:2.2 
+        ports:
+        - containerPort: 82
+          name: http-grpc
+        env:
+        - name: ASPNETCORE_URLS
+          value: "82"
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      volumes:
+      - name: tz-config
+        hostPath:
+          path: /etc/localtime
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
+  selector:
+    app: auth
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: auth
+spec:
+  tls:
+    - secretName: ctc666-certs
+  rules:
+  - host: auth.ctc666.com
+    http:
+      paths:
+      - backend:
+          serviceName: auth
+          servicePort: 80    

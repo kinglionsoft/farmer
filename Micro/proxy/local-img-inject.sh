@@ -1,4 +1,4 @@
-LOCAL="registry.yx.com"
+LOCAL="registry.local.com"
 
 usage() {
     echo "Usage:"
@@ -31,7 +31,7 @@ download() {
 	echo "--------------------------------"
     echo "$1"
     
-    # https://registry.yx.com/api/repositories/gcr.io/linkerd-io/controller/tags/stable-2.3.1
+    # https://registry.local.com/api/repositories/gcr.io/linkerd-io/controller/tags/stable-2.3.1
     q=$(echo "$1" | sed 's/:/\/tags\//')
     url="https://$LOCAL/api/repositories/$q"
 	echo "url: $url"

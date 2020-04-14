@@ -15,12 +15,12 @@ linkerd install | ./local-img-inject.sh pull -
 
 linkerd install | ./local-img-inject.sh inject - | kubectl apply -f -
 
-docker pull registry.yx.com/gcr.io/linkerd-io/controller:stable-2.3.1 && docker tag registry.yx.com/gcr.io/linkerd-io/controller:stable-2.3.1 gcr.io/linkerd-io/controller:stable-2.3.1
-docker pull registry.yx.com/gcr.io/linkerd-io/proxy:stable-2.3.1 && docker tag registry.yx.com/gcr.io/linkerd-io/proxy:stable-2.3.1 gcr.io/linkerd-io/proxy:stable-2.3.1
-docker pull registry.yx.com/gcr.io/linkerd-io/proxy-init:stable-2.3.1 && docker tag registry.yx.com/gcr.io/linkerd-io/proxy-init:stable-2.3.1 gcr.io/linkerd-io/proxy-init:stable-2.3.1
-docker pull registry.yx.com/gcr.io/linkerd-io/web:stable-2.3.1 && docker tag registry.yx.com/gcr.io/linkerd-io/web:stable-2.3.1 gcr.io/linkerd-io/web:stable-2.3.1
-docker pull registry.yx.com/prom/prometheus:v2.7.1 && docker tag registry.yx.com/prom/prometheus:v2.7.1 prom/prometheus:v2.7.1
-docker pull registry.yx.com/gcr.io/linkerd-io/grafana:stable-2.3.1 && docker tag registry.yx.com/gcr.io/linkerd-io/grafana:stable-2.3.1 gcr.io/linkerd-io/grafana:stable-2.3.1
+docker pull registry.local.com/gcr.io/linkerd-io/controller:stable-2.3.1 && docker tag registry.local.com/gcr.io/linkerd-io/controller:stable-2.3.1 gcr.io/linkerd-io/controller:stable-2.3.1
+docker pull registry.local.com/gcr.io/linkerd-io/proxy:stable-2.3.1 && docker tag registry.local.com/gcr.io/linkerd-io/proxy:stable-2.3.1 gcr.io/linkerd-io/proxy:stable-2.3.1
+docker pull registry.local.com/gcr.io/linkerd-io/proxy-init:stable-2.3.1 && docker tag registry.local.com/gcr.io/linkerd-io/proxy-init:stable-2.3.1 gcr.io/linkerd-io/proxy-init:stable-2.3.1
+docker pull registry.local.com/gcr.io/linkerd-io/web:stable-2.3.1 && docker tag registry.local.com/gcr.io/linkerd-io/web:stable-2.3.1 gcr.io/linkerd-io/web:stable-2.3.1
+docker pull registry.local.com/prom/prometheus:v2.7.1 && docker tag registry.local.com/prom/prometheus:v2.7.1 prom/prometheus:v2.7.1
+docker pull registry.local.com/gcr.io/linkerd-io/grafana:stable-2.3.1 && docker tag registry.local.com/gcr.io/linkerd-io/grafana:stable-2.3.1 gcr.io/linkerd-io/grafana:stable-2.3.1
 
 
 ```

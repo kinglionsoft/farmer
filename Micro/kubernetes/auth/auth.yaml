@@ -1,0 +1,123 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth
+      name: auth
+    spec:
+      containers:
+      - name: identity-server-4
+        imagePullPolicy: IfNotPresent
+        image: registry.local.com/ctc/identity-server-4:2.2 
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: AdminConfiguration__IdentityAdminBaseUrl
+          value: http://authadmin.svc.local.com/
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      volumes:
+      - name: tz-config
+        hostPath:
+          path: /etc/localtime
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: auth-admin
+  name: auth-admin
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth-admin
+      name: auth-admin
+    spec:
+      containers:
+      - name: identity-server-4-admin
+        imagePullPolicy: IfNotPresent
+        image: $image
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: AdminConfiguration__IdentityServerBaseUrl
+          value: http://auth.svc.local.com/
+        - name: AdminConfiguration__IdentityAdminRedirectUri
+          value: http://authadmin.svc.local.com/signin-oidc
+        - name: CTC_CLUSTER
+          value: k8s
+        - name: CTC_CONSUL_PORT
+          value: "8500"
+        - name: CTC_CONSUL_HOST
+          value: consul-agent
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+          volumes:
+      volumes:
+      - name: tz-config
+        hostPath:
+          path: /etc/localtime
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31080
+    name: http
+  selector:
+    app: auth
+  type: NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-admin
+  labels:
+    app: auth-admin
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31090
+    name: http
+  selector:
+    app: auth-admin
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: auth
+spec:
+  tls:
+    - secretName: ctc666-certs
+  rules:
+  - host: auth.ctc666.com
+    http:
+      paths:
+      - backend:
+          serviceName: auth
+          servicePort: 80    
