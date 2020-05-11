@@ -66,7 +66,7 @@ kubeadm config images pull
 [config/images] Pulled k8s.gcr.io/coredns:1.2.2
 
 # 添加kubeadm配置
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --apiserver-advertise-address=172.16.0.21 --apiserver-cert-extra-sans=192.168.0.245 --service-node-port-range 20000-40000
+sudo kubeadm init --image-repository=registry.aliyuncs.com/google_containers --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --apiserver-advertise-address=192.168.2.24 
 
 rm -rf $HOME/.kube; \
 mkdir -p $HOME/.kube; \
