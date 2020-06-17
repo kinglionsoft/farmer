@@ -13915,7 +13915,7 @@ spec:
             - --caCertFile=/etc/istio/certs/root-cert.pem
             - --tlsCertFile=/etc/istio/certs/cert-chain.pem
             - --tlsKeyFile=/etc/istio/certs/key.pem
-            - --injectConfig=/etc/istio/inject/config
+            - --injetestonfig=/etc/istio/inject/config
             - --meshConfig=/etc/istio/config/mesh
             - --healthCheckInterval=2s
             - --healthCheckFile=/health

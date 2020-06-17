@@ -12,14 +12,14 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   nfs:
-    path: /data/grafana
-    server: 172.18.181.176
+    path: /nfsroot/grafana
+    server: 192.168.2.24
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: grafana-data-pvc
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   accessModes:
     - ReadWriteOnce
@@ -45,14 +45,14 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   nfs:
-    path: /data/prometheus
-    server: 172.18.181.176
+    path: /nfsroot/prometheus
+    server: 192.168.2.24
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: prometheus-data-pvc
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   accessModes:
     - ReadWriteOnce

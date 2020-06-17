@@ -30,7 +30,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus
-  namespace: ns-monitor
+  namespace: monitor
   labels:
     app: prometheus
 ---
@@ -41,7 +41,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: prometheus
-    namespace: ns-monitor
+    namespace: monitor
 roleRef:
   kind: ClusterRole
   name: prometheus
@@ -51,7 +51,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-conf
-  namespace: ns-monitor
+  namespace: monitor
   labels:
     app: prometheus
 data:
@@ -307,7 +307,7 @@ data:
             regex: __meta_kubernetes_ingress_label_(.+)
           - source_labels: [__meta_kubernetes_namespace]
             target_label: kubernetes_namespace
-          - source_labels: [__meta_kubernetes_ingress_name]list
+          - source_labels: [__meta_kubernetes_ingress_name]
             target_label: kubernetes_name
 
       # Example scrape config for pods
@@ -350,7 +350,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-rules
-  namespace: ns-monitor
+  namespace: monitor
   labels:
     app: prometheus
 data:
@@ -368,12 +368,12 @@ data:
               description: "{{$labels.instance}}: CPU usage is above 75% (current value is: {{ $value }})"
 ---
 kind: Deployment
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 metadata:
   labels:
     app: prometheus
   name: prometheus
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -422,7 +422,7 @@ metadata:
   labels:
     app: prometheus
   name: prometheus-service
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   ports:
     - port: 9090

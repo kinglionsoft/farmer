@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   type: ExternalName
-  externalName: grafana-service.ns-monitor.svc.cluster.local
+  externalName: grafana-service.monitor.svc.cluster.local
   ports:
   - port: 3000
 ```

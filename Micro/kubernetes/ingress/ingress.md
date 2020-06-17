@@ -7,8 +7,8 @@
 
 # 创建证书
 
-kubectl create -n istio-system secret tls istio-ingressgateway-ctc666-certs --key ctc666.com.key --cert ctc666.com.pem
-kubectl create -n istio-system secret tls istio-ingressgateway-ctcfile-certs --key ctcfile.com.key --cert ctcfile.com.pem
+kubectl create -n istio-system secret tls istio-ingressgateway-test666-certs --key test666.com.key --cert test666.com.pem
+kubectl create -n istio-system secret tls istio-ingressgateway-testfile-certs --key testfile.com.key --cert testfile.com.pem
 
 # Mount
 cat > gateway-patch.json <<EOF
@@ -17,8 +17,8 @@ cat > gateway-patch.json <<EOF
   "op": "add",
   "path": "/spec/template/spec/containers/0/volumeMounts/0",
   "value": {
-    "mountPath": "/etc/istio/ingressgateway-ctc666-certs",
-    "name": "ingressgateway-ctc666-certs",
+    "mountPath": "/etc/istio/ingressgateway-test666-certs",
+    "name": "ingressgateway-test666-certs",
     "readOnly": true
   }
 },
@@ -26,9 +26,9 @@ cat > gateway-patch.json <<EOF
   "op": "add",
   "path": "/spec/template/spec/volumes/0",
   "value": {
-  "name": "ingressgateway-ctc666-certs",
+  "name": "ingressgateway-test666-certs",
     "secret": {
-      "secretName": "istio-ingressgateway-ctc666-certs",
+      "secretName": "istio-ingressgateway-test666-certs",
       "optional": true
     }
   }
@@ -37,8 +37,8 @@ cat > gateway-patch.json <<EOF
   "op": "add",
   "path": "/spec/template/spec/containers/0/volumeMounts/0",
   "value": {
-    "mountPath": "/etc/istio/ingressgateway-ctcfile-certs",
-    "name": "ingressgateway-ctcfile-certs",
+    "mountPath": "/etc/istio/ingressgateway-testfile-certs",
+    "name": "ingressgateway-testfile-certs",
     "readOnly": true
   }
 },
@@ -46,9 +46,9 @@ cat > gateway-patch.json <<EOF
   "op": "add",
   "path": "/spec/template/spec/volumes/0",
   "value": {
-  "name": "ingressgateway-ctcfile-certs",
+  "name": "ingressgateway-testfile-certs",
     "secret": {
-      "secretName": "istio-ingressgateway-ctcfile-certs",
+      "secretName": "istio-ingressgateway-testfile-certs",
       "optional": true
     }
   }
@@ -71,8 +71,8 @@ kubectl edit configmap nginx-configuration -n kube-system
 
 ### 代理配置
 ```bash
-kubectl create secret tls ctc666-certs --key ctc666.com.key --cert ctc666.com.pem
-kubectl create secret tls ctcfile-certs --key ctcfile.com.key --cert ctcfile.com.pem
+kubectl create secret tls test666-certs --key test666.com.key --cert test666.com.pem
+kubectl create secret tls testfile-certs --key testfile.com.key --cert testfile.com.pem
 
 kubectl create -f - <<EOF
 apiVersion: extensions/v1beta1
@@ -83,21 +83,21 @@ metadata:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   tls:
-    - secretName: ctc666-certs
+    - secretName: test666-certs
   rules:
-  - host: www.ctc666.com
+  - host: www.test666.com
     http:
       paths:
       - backend:
           serviceName: core-web
           servicePort: 80
-  - host: openapi.ctc666.com
+  - host: openapi.test666.com
     http:
       paths:
       - backend:
           serviceName: core-webapi
           servicePort: 80
-  - host: auth.ctc666.com
+  - host: auth.test666.com
     http:
       paths:
       - backend:
@@ -109,48 +109,48 @@ kubectl create -f - <<EOF
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ctc-web
+  name: test-web
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   tls:
-    - secretName: ctcfile-certs
+    - secretName: testfile-certs
   rules:
-  - host: www.ctcfile.com
+  - host: www.testfile.com
     http:
       paths:
       - backend:
-          serviceName: ctc-web
+          serviceName: test-web
           servicePort: 80
-  - host: openapi.ctcfile.com
+  - host: openapi.testfile.com
     http:
       paths:
       - backend:
           serviceName: core-webapi
           servicePort: 80
-  - host: auth.ctcfile.com
+  - host: auth.testfile.com
     http:
       paths:
       - backend:
           serviceName: core-auth
           servicePort: 80
-  - host: api.ctcfile.com
+  - host: api.testfile.com
     http:
       paths:
       - backend:
           serviceName: core-web
           servicePort: 80
-  - host: world-api.ctcfile.com
+  - host: world-api.testfile.com
     http:
       paths:
       - backend:
           serviceName: core-web
           servicePort: 80
-  - host: world.ctcfile.com
+  - host: world.testfile.com
     http:
       paths:
       - backend:
-          serviceName: ctc-web
+          serviceName: test-web
           servicePort: 80
 EOF
 
@@ -177,7 +177,7 @@ spec:
       containers:
       - name: web3
         imagePullPolicy: IfNotPresent
-        image: registry.cn-shenzhen.aliyuncs.com/ctc/web3
+        image: registry.cn-shenzhen.aliyuncs.com/test/web3
         ports:
         - containerPort: 80    
 ---
@@ -201,9 +201,9 @@ metadata:
   name: web3
 spec:
   tls:
-    - secretName: ctcfile-certs
+    - secretName: testfile-certs
   rules:
-  - host: web3.ctcfile.com
+  - host: web3.testfile.com
     http:
       paths:
       - backend:

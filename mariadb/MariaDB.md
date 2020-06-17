@@ -195,3 +195,17 @@ list servers
 show service "Read-Write-Service"
 ```
 
+## Log
+
+### Slow query
+
+## 性能
+
+### 连接数
+
+```sql
+show variables like 'max_connections';
+show global status like 'Connections';
+show global status like 'Max_used_connections';
+show global status like 'Thread_%';
+```

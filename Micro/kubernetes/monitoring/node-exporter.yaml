@@ -1,10 +1,10 @@
 kind: DaemonSet
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 metadata: 
   labels:
     app: node-exporter
   name: node-exporter
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   revisionHistoryLimit: 10
   selector:
@@ -32,7 +32,7 @@ metadata:
   labels:
     app: node-exporter
   name: node-exporter-service
-  namespace: ns-monitor
+  namespace: monitor
 spec:
   ports:
   - name: tcp

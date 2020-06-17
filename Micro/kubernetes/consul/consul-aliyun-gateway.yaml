@@ -30,4 +30,4 @@ spec:
     - destination:
         port:
           number: 80
-        host: ctc-consul-ui
+        host: test-consul-ui

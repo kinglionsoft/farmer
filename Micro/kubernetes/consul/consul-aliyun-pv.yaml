@@ -1,10 +1,10 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-0
+  name: data-default-test-consul-server-0
   labels:
     type: local
-    release: ctc
+    release: test
 spec:
   persistentVolumeReclaimPolicy: Recycle
   capacity:
@@ -17,10 +17,10 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-1
+  name: data-default-test-consul-server-1
   labels:
     type: local
-    release: ctc
+    release: test
 spec:
   persistentVolumeReclaimPolicy: Recycle
   capacity:

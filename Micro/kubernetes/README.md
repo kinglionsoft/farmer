@@ -87,7 +87,7 @@ Docker生成代理部署在Ubuntu18.04上，与Docker私有仓储(registry.local
 ### Docker镜像生成管道
 
 #### 生成和发布
-生成和发布的管道参考 [http://tfs:8080/tfs/EsonCollection/Ocelot.K8sHttpGateway/](http://tfs:8080/tfs/EsonCollection/Ocelot.K8sHttpGateway)
+生成和发布的管道参考
 
 * 完成Docker镜像打包上传后，需要删除输出目录，加快发布速度；
 * 只需要将k8s的部署配置文件发布。
@@ -97,4 +97,4 @@ Docker生成代理部署在Ubuntu18.04上，与Docker私有仓储(registry.local
 * 使用.csproj中的Version作为Docker镜像的标签，便于跟踪；**发布Docker镜像前必须更新项目版本号**
 * 生成的镜像名称需要同步更新到k8s的部署配置文件中（.yaml)
 * TFS Pipeline 自定义变量名：[TFS custom-variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables?view=azure-devops&tabs=shell#custom-variables)
-* 镜像的标签后缀名为：**BuildID**，例如：registry.local.com/ctc/ocelot:2.0.0.1773
+* 镜像的标签后缀名为：**BuildID**，例如：registry.local.com/test/ocelot:2.0.0.1773

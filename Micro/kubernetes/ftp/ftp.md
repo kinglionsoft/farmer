@@ -9,16 +9,16 @@
 * 创建Docker镜像
 
 ``` bash
-docker build -t registry.local.com/ctc/ftp .
+docker build -t registry.local.com/test/ftp .
 
 # test
 docker run --rm -i -t -v /data/ftp:/home/vsftpd  -p 20:20 -p 21:21 -p 9000-9010:9000-9010 \
-                -e FTP_USER=ctc \
-                -e FTP_PASS=ctc \
+                -e FTP_USER=test \
+                -e FTP_PASS=test \
                 -e PASV_ADDRESS=172.16.0.20 \
                 -e PASV_MIN_PORT=9000 \
                 -e PASV_MAX_PORT=9010 \
-                --name ftp registry.local.com/ctc/ftp
+                --name ftp registry.local.com/test/ftp
 ```
 
 * 部署FTP

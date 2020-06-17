@@ -29,14 +29,14 @@ spec:
     - ReadWriteMany
   nfs:
     server: nas
-    path: "/k8s/ctc"
+    path: "/k8s/test"
 EOF
 
 kubectl apply -f - <<EOF
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: ctc-share
+  name: test-share
 spec:
   storageClassName: manual
   accessModes:
@@ -60,12 +60,12 @@ spec:
     - ReadOnlyMany
   nfs:
     server: nas
-    path: "/k8s/ctc-static"
+    path: "/k8s/test-static"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: ctc-static
+  name: test-static
 spec:
   storageClassName: ""
   volumeName: pv-nfs-static
@@ -94,7 +94,7 @@ spec:
   volumes:
   - name: html
     persistentVolumeClaim:
-      claimName: ctc-share
+      claimName: test-share
 EOF
 
 # test

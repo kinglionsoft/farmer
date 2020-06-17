@@ -29,3 +29,14 @@ systemctl start nfs
 # /data access
 chown -R nfsnobody.nfsnobody /data
 ```
+
+* 192.168.2.24 - Ubuntu 18.04
+
+``` bash
+sudo apt install nfs-server
+sudo mkdir /nfsroot
+sudo chmod +rw -R /nfsroot
+echo "/nfsroot *(rw,sync,no_root_squash)">>/etc/exports
+sudo service nfs-server restart
+
+```

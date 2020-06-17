@@ -179,13 +179,13 @@ data:
     ## Ref: https://github.com/rabbitmq/rabbitmq-server/blob/master/docs/rabbitmq.conf.example   
     ## via a loopback interface (e.g. localhost)
     loopback_users.guest = false
-    loopback_users.ctc = false
+    loopback_users.test = false
   definitions.json: |
     {
       "users": [
         {
-          "name": "ctc",
-          "password": "Yxkj11!!$$",
+          "name": "user1",
+          "password": "pwd1",
           "tags": "administrator"
         }
       ],
@@ -193,8 +193,8 @@ data:
         {
           "configure": ".*",
           "read": ".*",
-          "user": "ctc",
-          "vhost": "ctc",
+          "user": "user1",
+          "vhost": "vhost1",
           "write": ".*"
         }
       ],
@@ -203,7 +203,7 @@ data:
           "name": "/"
         },
         {
-          "name": "ctc"
+          "name": "vhost1"
         }
       ]
     }      

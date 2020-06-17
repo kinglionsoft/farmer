@@ -11,7 +11,7 @@ tee data-consul-0-pv.yaml << EOF
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-0
+  name: data-default-test-consul-server-0
   labels:
     type: local
 spec:
@@ -27,7 +27,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-0
+  name: data-default-test-consul-server-0
 spec:
   storageClassName: manual
   accessModes:
@@ -39,7 +39,7 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-1
+  name: data-default-test-consul-server-1
   labels:
     type: local
 spec:
@@ -55,7 +55,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: data-default-ctc-consul-server-1
+  name: data-default-test-consul-server-1
 spec:
   storageClassName: manual
   accessModes:
@@ -129,7 +129,7 @@ EOF
 containers:
   - name: ocelot
     imagePullPolicy: IfNotPresent
-    image: registry.local.com/ctc/ocelot:2.0.0
+    image: registry.local.com/test/ocelot:2.0.0
     env: 
       - name: GlobalConfiguration__ServiceDiscoveryProvider__Host
         valueFrom:
@@ -142,13 +142,13 @@ containers:
 
 ``` bash
 # proxy
-kubectl port-forward ctc-consul-server-0 --address=0.0.0.0 8500
+kubectl port-forward test-consul-server-0 --address=0.0.0.0 8500
 
 # backup
-.\consul.exe kv export -http-addr=http://consul.local.com | out-file -encoding utf8 ctc-consul-bak.json
+.\consul.exe kv export -http-addr=http://consul.local.com | out-file -encoding utf8 test-consul-bak.json
 
 # import 注意编码改为utf8
-.\consul.exe kv import -http-addr=http://192.168.0.249:8500 @ctc-consul-bak.json
+.\consul.exe kv import -http-addr=http://192.168.0.249:8500 @test-consul-bak.json
 ```
 
 ## 阿里云

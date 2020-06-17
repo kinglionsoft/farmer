@@ -55,5 +55,5 @@ nodeGroups:
       withLocal: true
       attachIDs: ['sg-05d6a5ecd9358e263', 'sg-09057153a351f365b']
     ssh:
-      publicKeyName: 'ctc_korea'
+      publicKeyName: 'test_korea'
 ```

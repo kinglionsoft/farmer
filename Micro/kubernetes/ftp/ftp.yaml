@@ -335,7 +335,7 @@ spec:
       containers:
       - name: ftp
         imagePullPolicy: IfNotPresent
-        image: registry.local.com/ctc/ftp
+        image: registry.local.com/test/ftp
         ports:
           - containerPort: 21
             name: tcp-21
@@ -545,7 +545,7 @@ spec:
             name: tcp-9100
         env:
           - name: FTP_USER
-            value: ctc
+            value: test
           - name: FTP_PASS
             value: "Yxkj11!!$$"
           - name: PASV_MIN_PORT

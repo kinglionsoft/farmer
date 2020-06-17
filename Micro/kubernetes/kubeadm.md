@@ -83,7 +83,7 @@ sudo kubeadm join 172.16.0.21:6443 --token 2tw8sk.b5cjhdmiasqwhqw4 --discovery-t
 kubeadm token list
 
 # install pod network - Calico 
-# see: https://docs.projectcalico.org/v3.3/getting-started/kubernetes/
+# see: https://docs.projetestalico.org/v3.3/getting-started/kubernetes/
 
 # install pod network - Fannel - for working with Windows
 
