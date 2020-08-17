@@ -50,12 +50,12 @@ replicate_wild_do_table = yunqi.%
 * sql
 ```sql
 CHANGE MASTER TO
-  MASTER_HOST='192.168.2.10',
+  MASTER_HOST='172.16.153.177',
   MASTER_USER='rep',
   MASTER_PASSWORD='123',
   MASTER_PORT=3306,
-  MASTER_LOG_FILE='master-bin.000003', -- from SHOW MASTER STATUS
-  MASTER_LOG_POS=24361980,
+  MASTER_LOG_FILE='master-bin.000003',
+  MASTER_LOG_POS=760,
   MASTER_CONNECT_RETRY=10,
   MASTER_USE_GTID = slave_pos;
   
@@ -67,6 +67,13 @@ START SLAVE;
 
 ## MaxScale
 https://mariadb.com/kb/en/mariadb-maxscale-20-readwrite-splitting-with-mysql-replication/
+
+### Install
+
+```bash
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+dnf install maxscale # centos8
+```
 
 ### Setup
 
@@ -209,3 +216,7 @@ show global status like 'Connections';
 show global status like 'Max_used_connections';
 show global status like 'Thread_%';
 ```
+
+CREATE DATABASE yunqi 
+  CHARACTER SET = 'utf8mb4'
+  COLLATE = 'utf8mb4_general_ci';
