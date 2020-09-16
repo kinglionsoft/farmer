@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: showdoc
+  labels:
+    app: showdoc
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: showdoc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: showdoc
+  labels:
+    app: showdoc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: showdoc
+  template:
+    metadata:
+      labels:
+        app: showdoc
+    spec:
+      containers:
+      - name: showdoc-frontend
+        imagePullPolicy: IfNotPresent
+        image: registry.cn-shenzhen.aliyuncs.com/star7th/showdoc
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /var/www/html/
+          name: files
+        - mountPath: /etc/localtime
+          name: time
+      volumes:
+        - name: files
+          persistentVolumeClaim:
+            claimName: pvc-showdoc
+        - name: time
+          hostPath:
+            path: /etc/localtime
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-showdoc
+  labels:
+    name: pv-showdoc
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /nfsroot/showdoc
+    server: 172.16.153.180
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-showdoc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      name: pv-showdoc

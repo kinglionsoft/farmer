@@ -1,0 +1,308 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-conf
+data:
+  redis.conf: |
+    appendonly yes
+    cluster-enabled yes
+    cluster-config-file /var/lib/redis/nodes.conf
+    cluster-node-timeout 5000
+    dir /var/lib/redis
+    port 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 6379
+    name: redis
+  clusterIP: None
+  selector:
+    app: redis
+    appCluster: redis-cluster
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: redis
+  replicas: 6
+  selector:
+    matchLabels:
+      app: redis
+      appCluster: redis-cluster
+  template:
+    metadata:
+      labels:
+        app: redis
+        appCluster: redis-cluster
+    spec:
+      terminationGracePeriodSeconds: 20
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - redis
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: redis
+        image: redis:6.0.8
+        command:
+          - redis-server
+        args:
+          - /etc/redis/redis.conf
+          - --protected-mode
+          - "no"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+            - name: redis
+              containerPort: 6379
+              protocol: TCP
+            - name: cluster
+              containerPort: 16379
+              protocol: TCP
+        volumeMounts:
+          - name: redis-conf
+            mountPath: /etc/redis
+          - name: redis-data
+            mountPath: /var/lib/redis
+      volumes:
+      - name: redis-conf
+        configMap:
+          name: redis-conf
+          items:
+            - key: redis.conf
+              path: redis.conf
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ ReadWriteMany ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-0
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "0"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-0
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "0"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data0
+    server: 192.168.2.24
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-1
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "1"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-1
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "1"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data1
+    server: 192.168.2.24
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-2
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "2"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-2
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "2"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data2
+    server: 192.168.2.24
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-3
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "3"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-3
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "3"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data3
+    server: 192.168.2.24
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-4
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-4
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "4"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data4
+    server: 192.168.2.24
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data-redis-5
+  labels:
+    type: redis-nfs-claim
+    app: redis
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      app: redis
+      podindex: "5"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-redis-5
+  labels:
+    type: redis-nfs
+    app: redis
+    podindex: "5"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsroot/redis/data5
+    server: 192.168.2.24

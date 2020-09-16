@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rap2
+  labels:
+    app: rap2
+spec:
+  ports:
+  - name: frontend
+    port: 38081
+    targetPort: 38081
+  - name: backend
+    port: 38080
+    targetPort: 38080
+  selector:
+    app: rap2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rap2
+  labels:
+    app: rap2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rap2
+  template:
+    metadata:
+      labels:
+        app: rap2
+    spec:
+      containers:
+      - name: rap2-frontend
+        imagePullPolicy: IfNotPresent
+        image: rapteam/rap2-dolores:latest
+        ports:
+        - containerPort: 38081
+      - name: rap2-backend
+        imagePullPolicy: IfNotPresent
+        image: rapteam/rap2-delos:latest
+        command: ["/bin/sh"]
+        args: ["-c", "node dispatch.js"]
+        ports:
+        - containerPort: 38080
+        env:
+        - name: SERVE_PORT
+          value: "38080"
+        - name: MYSQL_URL
+          value: mariadb-rw
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_USERNAME
+          value: rap2
+        - name: MYSQL_PASSWD
+          value: rap21122
+        - name: MYSQL_SCHEMA
+          value: rap2
+        - name: REDIS_URL
+          value: redis
+        - name: REDIS_PORT
+          value: "6379"
+        - name: NODE_ENV
+          value: production
