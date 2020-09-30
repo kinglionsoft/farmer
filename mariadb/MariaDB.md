@@ -58,11 +58,11 @@ CHANGE MASTER TO
   MASTER_LOG_POS=760,
   MASTER_CONNECT_RETRY=10,
   MASTER_USE_GTID = slave_pos;
-  
+
 -- skip 1 error sql statement;
 STOP SLAVE;
 SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1;
-START SLAVE;  
+START SLAVE;
 ```
 
 ## MaxScale
@@ -216,7 +216,3 @@ show global status like 'Connections';
 show global status like 'Max_used_connections';
 show global status like 'Thread_%';
 ```
-
-CREATE DATABASE yunqi 
-  CHARACTER SET = 'utf8mb4'
-  COLLATE = 'utf8mb4_general_ci';
