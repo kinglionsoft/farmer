@@ -14,11 +14,11 @@
 bind-address		= 0.0.0.0
 
 server-id		= 1
-log_bin			= /var/log/mysql/mysql-bin.log
+log-bin
 expire_logs_days	= 10
 max_binlog_size   = 100M
-log_basename		= master
-binlog-format           = mixed
+log-basename      = master
+binlog-format     = mixed
 ```
 * user
 
@@ -31,6 +31,7 @@ FLUSH PRIVILEGES;
 FLUSH TABLES WITH READ LOCK;
 
 SHOW MASTER STATUS; -- Get binlog file and position
+select @@global.gtid_slave_pos, @@global.gtid_binlog_pos,@@global.gtid_current_pos;
 
 UNLOCK TABLE;
 
@@ -49,6 +50,20 @@ replicate_wild_do_table = yunqi.%
 
 * sql
 ```sql
+-- use MASTER_USE_GTID
+-- get gtid_pos of Master
+SELECT BINLOG_GTID_POS("master-bin.000876", 24635264);
+-- set gtid_slave_pos
+SET GLOBAL gtid_slave_pos = "0-1-2";
+CHANGE MASTER TO
+  MASTER_HOST='172.16.153.177',
+  MASTER_USER='rep',
+  MASTER_PASSWORD='123',
+  MASTER_PORT=3306,
+  MASTER_USE_GTID=current_pos
+  MASTER_CONNECT_RETRY=10;
+
+-- or use MASTER_LOG_FILE & MASTER_LOG_POS
 CHANGE MASTER TO
   MASTER_HOST='172.16.153.177',
   MASTER_USER='rep',
@@ -56,8 +71,7 @@ CHANGE MASTER TO
   MASTER_PORT=3306,
   MASTER_LOG_FILE='master-bin.000003',
   MASTER_LOG_POS=760,
-  MASTER_CONNECT_RETRY=10,
-  MASTER_USE_GTID = slave_pos;
+  MASTER_CONNECT_RETRY=10;
 
 -- skip 1 error sql statement;
 STOP SLAVE;

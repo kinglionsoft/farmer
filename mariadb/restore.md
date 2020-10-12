@@ -79,3 +79,10 @@ sudo chown -R mysql:mysql /var/lib/mysql/dbname/
 ALTER TABLE table1 IMPORT TABLESPACE;
 
 ```
+
+###
+
+
+## Errors
+
+* InnoDB: Linux Native AIO disabled
