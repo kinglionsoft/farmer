@@ -1,0 +1,9 @@
+[Unit]
+Description=FRPS
+Documentation=FRPS
+
+[Service]
+ExecStart=/opt/proxy/frp_0.34.1/frps -c /opt/proxy/frps.ini
+
+[Install]
+WantedBy=multi-user.target

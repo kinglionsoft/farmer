@@ -6,15 +6,13 @@ metadata:
     app: kong-dashboard
 spec:
   ports:
-    # the port that this service should serve on
-  - port: 18080
-    targetPort: 8080
-    nodePort: 30088
+  - port: 80
+    targetPort: 1337
   selector:
     app: kong-dashboard
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -22,6 +20,9 @@ metadata:
   name: kong-dashboard
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: kong-dashboard
   template:
     metadata:
       labels:
@@ -31,8 +32,21 @@ spec:
       containers:
       - name: kong-dashboard
         imagePullPolicy: IfNotPresent
-        image: pgbi/kong-dashboard
-        command: ["./docker/entrypoint.sh"]
-        args: ["start", "--kong-url", "http://kong-admin:8001"]
-      nodeSelector:
-        kubernetes.io/hostname: eson-entry
+        image: pantsel/konga
+        ports:
+        - containerPort: 1337
+          name: http
+          protocol: TCP
+        env:
+        - name: DB_ADAPTER
+          value: mysql
+        - name: DB_HOST
+          value: mariadb-rw
+        - name: DB_USER
+          value: dev
+        - name: DB_PASSWORD
+          value: "1234"
+        - name: DB_DATABASE
+          value: konga
+        - name: NODE_ENV
+          value: production

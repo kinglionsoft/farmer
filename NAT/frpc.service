@@ -1,0 +1,9 @@
+[Unit]
+Description=FRPC
+Documentation=FRPC
+
+[Service]
+ExecStart=/home/dev/proxy/frp_0.34.1/frpc -c /home/dev/proxy/frpc.ini
+
+[Install]
+WantedBy=multi-user.target

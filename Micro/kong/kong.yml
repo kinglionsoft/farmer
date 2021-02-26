@@ -1,0 +1,9 @@
+_format_version: "1.1"
+
+services:
+- name: demo
+  url: http://192.168.2.23:5000
+  routes:
+  - name: my-route
+    paths:
+    - /demo
