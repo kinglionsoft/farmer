@@ -1,0 +1,9 @@
+persistence:
+  enabled: true
+  accessModes:
+  - ReadWriteOnce
+  size: 10Gi
+  existingClaim: pvc-loki
+config:
+  limits_config:
+    ingestion_burst_size_mb: 20

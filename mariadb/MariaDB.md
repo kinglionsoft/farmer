@@ -52,11 +52,11 @@ replicate_wild_do_table = yunqi.%
 ```sql
 -- use MASTER_USE_GTID
 -- get gtid_pos of Master
-SELECT BINLOG_GTID_POS("master-bin.000876", 24635264);
+SELECT BINLOG_GTID_POS("slave1-bin.000001", 329);
 -- set gtid_slave_pos
-SET GLOBAL gtid_slave_pos = "0-1-2";
+SET GLOBAL gtid_slave_pos = "0-2-19554633";
 CHANGE MASTER TO
-  MASTER_HOST='172.16.153.177',
+  MASTER_HOST='172.16.153.178',
   MASTER_USER='rep',
   MASTER_PASSWORD='123',
   MASTER_PORT=3306,

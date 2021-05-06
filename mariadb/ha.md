@@ -29,8 +29,8 @@ dnf install keepalived -y
 * create mariadb user
 
 ```
-create user keepalived@localhost identified by '1234';
-grant replication client on *.* to keepalived@localhost;
+create user keepalived@'127.0.0.1' identified by '1234';
+grant replication client on *.* to keepalived@'127.0.0.1';
 flush privileges;
 
 ```

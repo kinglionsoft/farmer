@@ -3,14 +3,14 @@ kubectl create -f - <<EOF
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: statestore
+  name: pubsub
   namespace: default
 spec:
-  type: state.redis
+  type: pubsub.redis
   version: v1
   metadata:
   - name: redisHost
-    value: redis.default.svc.cluster.local:6379
+    value: redis-master:6379
   - name: redisPassword
     value: ""
 EOF
