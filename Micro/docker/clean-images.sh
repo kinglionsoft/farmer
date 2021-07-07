@@ -1,6 +1,7 @@
 #!/bin/bash
 
-registry='registry.ytzx.com'
+registry='ytzx2020'
+keeps=('registry.ytzx.com/java-8:server-jre-8u202-zh-slim')
 
 docker stop $(docker ps -a | grep "Exited" | awk '{print $1 }') 2>/dev/null
 docker rm $(docker ps -a | grep "Exited" | awk '{print $1 }') 2>/dev/null
@@ -19,12 +20,14 @@ do
     arr=(${img//:/ })
     imgName=${arr[0]}
 
-    if [ "$last" = "$imgName" ]; then
+    if [[ "${keeps[@]}" =~ "${imgName}" ]]; then
+        echo "keep"
+    elif [ "$last" = "$imgName" ]; then
         echo "remove"
         docker rmi $img
     else
         # keep the latest
         echo "keep"
-        last=$imgName 
+        last=$imgName
     fi
 done
