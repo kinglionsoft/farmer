@@ -7,3 +7,7 @@ persistence:
 config:
   limits_config:
     ingestion_burst_size_mb: 20
+
+  table_manager:
+    retention_deletes_enabled: true
+    retention_period: 672h

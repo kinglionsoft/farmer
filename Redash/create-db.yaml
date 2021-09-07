@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: redash-create-db
+spec:
+  template:
+    metadata:
+      name: redash-create-db
+    spec:
+      containers:
+      - name: redash
+        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:0616
+        imagePullPolicy: IfNotPresent
+        args:
+          - create_db
+        env:
+        - name: REDASH_LOG_LEVEL
+          value: INFO
+        - name: REDASH_REDIS_URL
+          value: "redis://redis-master:6379/1"
+        - name: REDASH_DATABASE_URL
+          value: "postgresql://redash:Ytzx11##@172.16.153.177:5432/redash"
+        - name: REDASH_RATELIMIT_ENABLED
+          value: "false"
+        - name: REDASH_ENFORCE_CSRF
+          value: "true"
+        - name: PYTHONUNBUFFERED
+          value: "0"
+      imagePullSecrets:
+        - name: ytzx
+      restartPolicy: Never
