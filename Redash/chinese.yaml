@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: redash
-        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:0616
+        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:1119
         imagePullPolicy: IfNotPresent
         args:
           - server
@@ -46,11 +46,15 @@ spec:
           value: "true"
         - name: PYTHONUNBUFFERED
           value: "0"
+        - name: ORACLE_HOME
+          value: "/usr/lib/oracle/12.2/client64"
+        - name: LD_LIBRARY_PATH
+          value: "/usr/lib/oracle/12.2/client64/lib"
         ports:
         - containerPort: 5000
           name: http
       - name: redash-worker
-        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:0616
+        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:1119
         imagePullPolicy: IfNotPresent
         args:
           - worker
@@ -67,8 +71,12 @@ spec:
           value: "true"
         - name: PYTHONUNBUFFERED
           value: "0"
+        - name: ORACLE_HOME
+          value: "/usr/lib/oracle/12.2/client64"
+        - name: LD_LIBRARY_PATH
+          value: "/usr/lib/oracle/12.2/client64/lib"
       - name: redash-scheduler
-        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:0616
+        image: registry-vpc.cn-hangzhou.aliyuncs.com/ytzx2020/redash-orgin:1119
         imagePullPolicy: IfNotPresent
         args:
           - scheduler
@@ -85,6 +93,10 @@ spec:
           value: "true"
         - name: PYTHONUNBUFFERED
           value: "0"
+        - name: ORACLE_HOME
+          value: "/usr/lib/oracle/12.2/client64"
+        - name: LD_LIBRARY_PATH
+          value: "/usr/lib/oracle/12.2/client64/lib"
       imagePullSecrets:
         - name: ytzx
       volumes:

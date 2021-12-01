@@ -1,5 +1,7 @@
 # Redash 中文版
 
+https://www.dazdata.com/
+
 ## 安装
 
 ### PostgreSQL
