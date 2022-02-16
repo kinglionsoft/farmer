@@ -8,18 +8,23 @@
 
 mariabackup --user=root --backup --stream=xbstream | gzip > backupstream.gz
 
+# or
+mariabackup --user=root --backup --target-dir=/data/backup/xx
+mariabackup --backup --target-dir=/mdata/backup/mysql0125 --user=root
+
 # restore
 
 gunzip -c backupstream.gz | mbstream -x
 
-mariabackup --prepare --target-dir=/var/mariadb/backup/
+mariabackup --prepare --target-dir=/data/backup/xx
 
 systemctl stop mariadb.service
 
 # backup data directory
 cp -rf /var/lib/mysql/xxx /data/backup/xxx
 
-mariabackup --copy-back --target-dir=/var/mariadb/backup/
+mariabackup --copy-back --target-dir=/data/backup/xx
+
 
 chown -R mysql:mysql /var/lib/mysql/
 

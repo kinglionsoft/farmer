@@ -15,7 +15,7 @@ AND `table_name`='table'
 
 ```sql
 -- 开启
-SET profiling=1; 
+SET profiling=1;
 
 -- 执行某个查询
 
@@ -26,4 +26,10 @@ show profile cpu,block io,memory,swaps,context switches,source for QUERY 34;
 
 -- 发现 Sending data 耗时巨大
 
+```
+
+### 查看最近死锁
+
+```sql
+SHOW ENGINE INNODB STATUS
 ```
