@@ -26,7 +26,8 @@ CREATE USER 'mig'@'172.16.153.%' IDENTIFIED BY '123';
 grant all ON *.*  TO 'mig'@'172.16.153.%'；
 FLUSH PRIVILEGES;
 
-mysqldump  -h mysql_host -u mig -p'123' -p --databases dbname1 dbname2 | mysql -h mariadb_host -u root
+# or
+mysqldump  -h mysql_host -u mig -p'123' --databases dbname1 dbname2 | mysql -h mariadb_host -u root
 
 # 4. create users
 
